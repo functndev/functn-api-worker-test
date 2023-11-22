@@ -33,10 +33,12 @@ export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext) {
 		const url = new URL(request.url);
 		const ai = new Ai(env.AI);
+		console.log('ai query', url.searchParams.get('prompt'));
 		const stream = await ai.run('@cf/mistral/mistral-7b-instruct-v0.1', {
 			prompt: url.searchParams.get('prompt') || 'What is the meaning of life?',
 			stream: true,
 		});
+
 		return Response.json(stream, { headers: { 'content-type': 'text/event-stream' } });
 	},
 };
