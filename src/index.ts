@@ -8,8 +8,11 @@
  * Learn more at https://developers.cloudflare.com/workers/
  */
 
+import { Ai } from '@cloudflare/ai';
+
 export interface Env {
 	SECRET: string;
+	AI: any;
 	// Example binding to KV. Learn more at https://developers.cloudflare.com/workers/runtime-apis/kv/
 	// MY_KV_NAMESPACE: KVNamespace;
 	//
@@ -27,7 +30,13 @@ export interface Env {
 }
 
 export default {
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return new Response('Hello World! ' + env.SECRET);
+	async fetch(request: Request, env: Env, ctx: ExecutionContext) {
+		const url = new URL(request.url);
+		const ai = new Ai(env.AI);
+		const stream = await ai.run('@cf/mistral/mistral-7b-instruct-v0.1', {
+			prompt: url.searchParams.get('prompt') || 'What is the meaning of life?',
+			stream: true,
+		});
+		return Response.json(stream, { headers: { 'content-type': 'text/event-stream' } });
 	},
 };
