@@ -33,6 +33,7 @@ export default {
 	async fetch(request: Request, env: Env, ctx: ExecutionContext) {
 		const url = new URL(request.url);
 		const ai = new Ai(env.AI);
+		return new Response('please send your prompt');
 		if (url.searchParams.get('prompt')) {
 			const prompt = decodeURIComponent(url.searchParams.get('prompt') || '') || 'What is grouped query attention?';
 			console.log('prompt', prompt);
