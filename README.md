@@ -10,7 +10,7 @@ run npm install to install all dependencies
 
 npm install
 
-    ```
+```
 
 run npm dev to start the development server
 
@@ -18,9 +18,24 @@ run npm dev to start the development server
 
 npm run dev
 
-    ```
+```
 
 ## Deployment
 
-deployment is done via github action, so push to main will deploy the worker
+deployment is done via github action, so push to main will deploy the worker.
+it requires a repository secret called CLOUDFLARE_API_TOKEN with the api token of your cloudflare account.
 ````
+
+## Documentation
+
+<https://developers.cloudflare.com/workers/>
+
+## debugging
+
+you can connect to a live log stream via the wrangler tail command. this will provide http logs and any console logs from your worker code
+
+```bash
+
+CLOUDFLARE_API_TOKEN=YOUR_API_TOKEN npx wrangler tail
+
+```
