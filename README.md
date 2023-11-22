@@ -39,3 +39,23 @@ you can connect to a live log stream via the wrangler tail command. this will pr
 CLOUDFLARE_API_TOKEN=YOUR_API_TOKEN npx wrangler tail
 
 ```
+
+## Secrets
+
+### locally
+
+create a file called .dev.vars in a .dotenv format
+
+```bash
+SECRET_KEY=value
+```
+
+### remotely
+
+secrets are set via the wrangler cli. this will create the secret remotly inside of cloudflare and the secret will be available to your code at runtime
+
+```bash
+
+CLOUDFLARE_API_TOKEN=YOUR_API_TOKEN npx wrangler secret put SECRET_NAME
+
+```
