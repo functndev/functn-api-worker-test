@@ -1,6 +1,7 @@
 name = "cloudflare-worker-starterkit"
 main = "src/index.ts"
 compatibility_date = "2023-11-21"
+account_id = "e44540d8d3d22a5ebbadc5f131aeecd5"
 
 # Variable bindings. These are arbitrary, plaintext strings (similar to environment variables)
 # Note: Use secrets to store sensitive data.
